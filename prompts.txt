@@ -224,3 +224,24 @@ Do not:
 - Add routing
 - Add global state management
 - Implement SEO audit functionality
+
+
+
+
+
+# Prompt - 9
+
+Implement the audit results page.
+
+Display:
+- Overall audit summary
+- Total Pass, Warning, and Fail counts
+- Performance summary
+- Individual audit sections
+- Status badges (Pass, Warning, Fail)
+- Issue description
+- Affected element
+- Recommendation
+
+Use a clean card-based layout with collapsible sections where appropriate.
+Use mock data only.

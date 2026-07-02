@@ -4,36 +4,46 @@ import Button from "../ui/Button";
 import Card from "../ui/Card";
 import Input from "../ui/Input";
 
-export default function AuditForm() {
+interface AuditFormProps {
+  loading?: boolean;
+  onSubmit: (url: string) => void;
+}
+
+export default function AuditForm({
+  loading = false,
+  onSubmit,
+}: AuditFormProps) {
   const [url, setUrl] = useState("");
-  const [loading] = useState(false);
   const [error, setError] = useState("");
 
   function validateUrl(value: string) {
     try {
-      new URL(value);
-      return true;
+      const parsed = new URL(value);
+
+      return parsed.protocol === "http:" || parsed.protocol === "https:";
     } catch {
       return false;
     }
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    if (!url.trim()) {
+    const value = url.trim();
+
+    if (!value) {
       setError("Website URL is required.");
       return;
     }
 
-    if (!validateUrl(url)) {
+    if (!validateUrl(value)) {
       setError("Enter a valid URL.");
       return;
     }
 
     setError("");
 
-    console.log(url);
+    onSubmit(value);
   }
 
   return (
