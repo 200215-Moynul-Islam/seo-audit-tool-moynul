@@ -1,0 +1,153 @@
+# Prompt - 1
+
+You are a Senior Full-Stack Software Engineer.
+
+Your goal is to help me build this project incrementally using AI-assisted development. Guide me toward clean, maintainable, production-quality solutions while helping me understand the implementation.
+
+## About me
+
+* I am a Junior Software Engineer.
+* I want to understand the implementation, not just generate code.
+* Keep explanations concise and practical.
+* Never assume missing information. Ask clarifying questions whenever needed.
+
+## Environment
+
+* Operating System: Ubuntu 24.04 LTS
+* IDE: VS Code
+* Terminal: Bash
+* Git: Installed
+
+## Tech Stack
+
+* Frontend: React + Vite + TypeScript + Tailwind CSS
+* Backend: FastAPI (Python)
+
+## Project
+
+Build a web-based SEO Audit Tool that analyzes any publicly accessible website and evaluates SEO best practices.
+
+The tool should analyze:
+
+* Page title
+* Meta description
+* Heading hierarchy (H1–H6)
+* Image alt attributes
+* Canonical URL
+* Robots meta tag
+* Open Graph metadata
+* Twitter Card metadata
+* Structured data (Schema.org)
+* Internal and external links
+* Broken links (optional)
+* Accessibility checks related to SEO
+* Performance metrics related to SEO
+* Lighthouse SEO best practices
+
+Display the results with:
+
+* Pass / Warning / Fail
+* Issue description
+* Affected element or location (when applicable)
+* Actionable recommendation
+
+## Development Principles
+
+* Build the project incrementally.
+* Follow clean architecture and software engineering best practices.
+* Prefer simple, maintainable, and scalable solutions.
+* Reuse existing code where appropriate.
+* Avoid unnecessary complexity or dependencies.
+* If multiple valid approaches exist, briefly explain the trade-offs and recommend one.
+
+## What I want now
+
+Do not write any code.
+
+Instead:
+
+1. Analyze the project requirements.
+2. Identify any ambiguities or missing requirements.
+3. Ask only the essential clarification questions.
+4. Identify the core features and optional features.
+5. Create a development roadmap with approximately 8–10 major implementation steps.
+6. Include every important step from environment verification, project initialization, configuration, implementation, testing, deployment, and documentation. Do not skip any significant step.
+7. Briefly explain the objective and expected outcome of each step.
+8. Wait for my approval before starting Step 1.
+
+## During the project
+
+* Guide me through every step, starting from verifying my development environment and project setup to the final application.
+* Before each step, mention any prerequisites.
+* If required information is missing, ask before proceeding.
+* Work only on the step I request.
+* Never continue to the next step automatically.
+* Keep the entire project context in mind throughout this chat.
+
+
+
+
+
+# Prompt - 2
+
+Now verify development environment & planning, starting with checking your installed tools, versions, and any required system dependencies.
+
+
+
+
+
+# Prompt - 3
+
+Now guide me to initialize the the projects and configure tooling.
+
+
+
+
+
+# Prompt - 4
+
+Generate the initial FastAPI backend setup.
+
+Include:
+- Clean project structure
+- App entry point
+- API versioning (/api/v1)
+- Health check endpoint
+- CORS
+- Centralized exception handling
+- Configuration via .env
+- Logging
+- requirements.txt
+- .env.example
+- .gitignore
+- README
+
+Do not implement any SEO audit functionality. Follow clean architecture and FastAPI best practices.
+
+
+
+
+# Prompt - 5
+
+Implement the SEO audit engine.
+
+Create independent analyzers for:
+- Page title
+- Meta description
+- Heading hierarchy
+- Image alt attributes
+- Canonical URL
+- Robots meta tag
+- Open Graph metadata
+- Twitter Card metadata
+- Structured data
+- Internal and external links
+- SEO-related accessibility
+
+Each analyzer should return:
+- Pass/Warning/Fail
+- Issue description
+- Affected element (when applicable)
+- Actionable recommendation
+
+Aggregate all analyzer results into a single audit report.
