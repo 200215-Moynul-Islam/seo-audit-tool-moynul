@@ -189,3 +189,38 @@ Create the audit endpoint that:
 - Runs all analyzers
 - Returns a standardized JSON audit report
 - Uses proper validation and error handling.
+
+
+
+
+
+# Prompt - 8
+
+Implement the frontend foundation and home page.
+
+Include:
+- Reusable Button component
+- Reusable Input component
+- Reusable Card component
+- Reusable Badge component
+- Reusable Spinner component
+- Reusable Container component
+- Header with application title and subtitle
+- Footer with application name and version
+- Responsive home page layout
+- Hero section
+- Application title and short description
+- URL input field
+- Audit button
+- Client-side URL validation feedback
+- Loading state
+- Clean spacing, typography, and responsive design
+- Black-and-white theme with one subtle accent color
+- Use the reusable design system components throughout.
+
+Do not:
+- Connect to the backend
+- Implement API integration
+- Add routing
+- Add global state management
+- Implement SEO audit functionality
