@@ -1,7 +1,8 @@
-import httpx
+from urllib.parse import urlparse
 import socket
 import ipaddress
-from urllib.parse import urlparse
+
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 
 from app.services.document import ParsedDocument
 
@@ -14,13 +15,10 @@ def validate_url(url: str) -> bool:
     try:
         parsed = urlparse(url)
 
-        if parsed.scheme not in ("http", "https"):
-            return False
-
-        if not parsed.netloc:
-            return False
-
-        return True
+        return (
+            parsed.scheme in ("http", "https")
+            and bool(parsed.netloc)
+        )
     except Exception:
         return False
 
@@ -53,29 +51,48 @@ def fetch_page(url: str) -> ParsedDocument:
         raise FetchError("Blocked host")
 
     try:
-        with httpx.Client(
-            follow_redirects=True,
-            timeout=httpx.Timeout(10.0, connect=5.0),
-            headers={"User-Agent": "SEO-Audit-Tool"}
-        ) as client:
-
-            response = client.get(url)
-
-            if response.status_code >= 400:
-                raise FetchError(f"HTTP error {response.status_code}")
-
-            return ParsedDocument(
-                url=url,
-                final_url=str(response.url),
-                status_code=response.status_code,
-                html=response.text
+        with sync_playwright() as p:
+            browser = p.chromium.launch(
+                headless=True,
+                args=[
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage",
+                ],
             )
 
-    except httpx.TimeoutException:
-        raise FetchError("Timeout")
+            page = browser.new_page()
 
-    except httpx.RequestError as e:
-        raise FetchError(f"Request error: {str(e)}")
+            page.set_default_timeout(30000)
+
+            response = page.goto(
+                url,
+                wait_until="domcontentloaded",
+                timeout=30000,
+            )
+
+            if response is None:
+                browser.close()
+                raise FetchError("No response received")
+
+            if response.status >= 400:
+                browser.close()
+                raise FetchError(f"HTTP error {response.status}")
+
+            html = page.content()
+
+            document = ParsedDocument(
+                url=url,
+                final_url=page.url,
+                status_code=response.status,
+                html=html,
+            )
+
+            browser.close()
+
+            return document
+
+    except PlaywrightTimeoutError:
+        raise FetchError("Request timed out")
 
     except Exception as e:
-        raise FetchError(f"Unexpected error: {str(e)}")
+        raise FetchError(str(e))

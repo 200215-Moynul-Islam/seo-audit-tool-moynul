@@ -168,3 +168,24 @@ Include:
 - Return a structured parsed document for analyzers
 - Keep fetching logic separate from parsing logic
 - Do not implement any SEO analysis yet.
+
+
+
+
+
+# Prompt - 7
+Implement the performance analyzer and complete the audit API.
+
+Performance checks:
+- Response time
+- HTML page size
+- Total HTTP requests
+- CSS file count
+- JavaScript file count
+- Image count and total image size (when measurable)
+
+Create the audit endpoint that:
+- Accepts a website URL
+- Runs all analyzers
+- Returns a standardized JSON audit report
+- Uses proper validation and error handling.

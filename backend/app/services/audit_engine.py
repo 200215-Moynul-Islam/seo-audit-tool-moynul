@@ -9,6 +9,7 @@ from app.analyzers.twitter import TwitterAnalyzer
 from app.analyzers.structured_data import StructuredDataAnalyzer
 from app.analyzers.links import LinksAnalyzer
 from app.analyzers.accessibility import AccessibilityAnalyzer
+from app.analyzers.performance import PerformanceAnalyzer
 
 
 class AuditEngine:
@@ -26,14 +27,23 @@ class AuditEngine:
             LinksAnalyzer(),
             AccessibilityAnalyzer(),
         ]
+        self.performance_analyzer = PerformanceAnalyzer()
 
-    def run(self, soup, url):
+    def run(self, document):
+        soup = document.soup
+        url = document.final_url
+        html = document.html
+
         results = []
 
         for analyzer in self.analyzers:
             results.append(analyzer.analyze(soup, url))
 
+        performance_result = self.performance_analyzer.analyze(soup, url, html)
+
+        results.append(performance_result)
+
         return {
             "url": url,
-            "issues": results,
+            "issues": results
         }
