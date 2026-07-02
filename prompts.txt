@@ -273,3 +273,24 @@ The footer component is not staying in the bottom in the landing page.
 The header is not fixed. 
 
 Solve this problem with minimal change.
+
+
+
+
+
+# Prompt - 12
+
+Generate a professional README.md for a full-stack SEO Audit Tool.
+
+Include:
+- Root README (project overview, architecture, folder structure, setup)
+- Backend README section (FastAPI setup, API endpoints, environment variables)
+- Frontend README section (React + Vite + TypeScript + Tailwind setup, running instructions)
+
+Requirements:
+- Clear and concise structure
+- Developer-focused (no marketing tone)
+- Include API overview and main flow (URL → backend → analysis → response → UI)
+- Include how to run both frontend and backend locally
+- Include environment variables examples
+- Keep it production-quality and minimal
