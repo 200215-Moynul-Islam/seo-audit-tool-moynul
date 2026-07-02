@@ -260,3 +260,16 @@ Requirements:
 - Display audit results using the existing UI
 - Keep API logic separate from UI components
 - Use TypeScript interfaces for API models.
+
+
+
+
+
+# Prompt - 11
+
+UI issues:
+
+The footer component is not staying in the bottom in the landing page.
+The header is not fixed. 
+
+Solve this problem with minimal change.

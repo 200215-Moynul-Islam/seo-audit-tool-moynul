@@ -36,10 +36,10 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen flex flex-col bg-neutral-50">
       <Header />
 
-      <main className="py-16">
+      <main className="flex-1 pt-24 pb-16">
         <Container>
           {/* Title Section */}
           <section className="mx-auto mb-12 max-w-3xl text-center">
