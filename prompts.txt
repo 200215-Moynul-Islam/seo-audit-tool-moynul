@@ -151,3 +151,20 @@ Each analyzer should return:
 - Actionable recommendation
 
 Aggregate all analyzer results into a single audit report.
+
+
+
+
+
+# Prompt - 6
+
+Implement the page fetching module.
+
+Include:
+- URL validation
+- Fetch only publicly accessible pages
+- HTTP timeout, redirects, and error handling
+- Parse HTML using BeautifulSoup
+- Return a structured parsed document for analyzers
+- Keep fetching logic separate from parsing logic
+- Do not implement any SEO analysis yet.
