@@ -1,39 +1,16 @@
 export type AuditStatus = "pass" | "warning" | "fail";
 
-export interface AuditResult {
-  id: string;
-  title: string;
+export interface AuditIssue {
+  rule: string;
   status: AuditStatus;
-  description: string;
-  affectedElement?: string;
+  message: string;
+  element?: string | null;
   recommendation: string;
+
+  metrics?: Record<string, number>;
 }
 
-export interface AuditSection {
-  id: string;
-  title: string;
-  results: AuditResult[];
-}
-
-export interface PerformanceSummary {
-  responseTime: number;
-  pageSize: string;
-  requests: number;
-  cssFiles: number;
-  jsFiles: number;
-  images: number;
-}
-
-export interface AuditSummary {
-  score: number;
-  passed: number;
-  warnings: number;
-  failed: number;
-  totalChecks: number;
-}
-
-export interface AuditReport {
-  summary: AuditSummary;
-  performance: PerformanceSummary;
-  sections: AuditSection[];
+export interface AuditResponse {
+  url: string;
+  issues: AuditIssue[];
 }

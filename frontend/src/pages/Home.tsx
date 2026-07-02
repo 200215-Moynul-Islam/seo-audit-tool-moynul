@@ -8,25 +8,31 @@ import Container from "../components/ui/Container";
 import AuditForm from "../components/audit/AuditForm";
 import AuditResults from "../components/audit/AuditResults";
 
-import { mockAudit } from "../data/mockAudit";
+import type { AuditResponse } from "../types/audit";
 
-import type { AuditReport } from "../types/audit";
+import { auditWebsite } from "../services/audit";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
+  const [report, setReport] = useState<AuditResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const [report, setReport] = useState<AuditReport | null>(null);
+  async function handleAudit(url: string) {
+    try {
+      setLoading(true);
+      setError(null);
 
-  function handleAudit(url: string) {
-    console.log(url);
+      const result = await auditWebsite(url);
 
-    setLoading(true);
+      setReport(result);
+    } catch (err) {
+      console.error(err);
 
-    setTimeout(() => {
-      setReport(mockAudit);
-
+      setError("Failed to audit website. Please try again.");
+      setReport(null);
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   }
 
   return (
@@ -35,6 +41,7 @@ export default function Home() {
 
       <main className="py-16">
         <Container>
+          {/* Title Section */}
           <section className="mx-auto mb-12 max-w-3xl text-center">
             <h1 className="text-5xl font-bold tracking-tight">
               SEO Audit Tool
@@ -46,17 +53,29 @@ export default function Home() {
             </p>
           </section>
 
+          {/* Input Form */}
           <AuditForm loading={loading} onSubmit={handleAudit} />
 
-          {loading && (
-            <div className="mt-10 text-center">
-              <p className="text-neutral-500">Auditing website...</p>
+          {/* Error State */}
+          {error && (
+            <div className="mt-8 rounded-xl border border-red-200 bg-red-50 p-4 text-center text-red-600">
+              {error}
             </div>
           )}
 
+          {/* Loading State */}
+          {loading && (
+            <div className="mt-10 text-center">
+              <p className="text-neutral-500 animate-pulse">
+                Auditing website...
+              </p>
+            </div>
+          )}
+
+          {/* Results */}
           {report && (
             <div className="mt-12">
-              <AuditResults report={report} />
+              <AuditResults issues={report.issues} />
             </div>
           )}
         </Container>

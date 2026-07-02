@@ -245,3 +245,18 @@ Display:
 
 Use a clean card-based layout with collapsible sections where appropriate.
 Use mock data only.
+
+
+
+
+
+# Prompt - 10
+
+Integrate the frontend with the backend.
+
+Requirements:
+- Call the audit API
+- Handle loading, success, and error states
+- Display audit results using the existing UI
+- Keep API logic separate from UI components
+- Use TypeScript interfaces for API models.
